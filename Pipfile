@@ -7,6 +7,7 @@ verify_ssl = true
 
 [packages]
 chalice = "==1.12.0"
+python-interface = "==1.5.3"
 
 [requires]
 python_version = "3.7"
