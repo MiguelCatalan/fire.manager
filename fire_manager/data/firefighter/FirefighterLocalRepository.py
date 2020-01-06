@@ -12,11 +12,13 @@ class FirefighterLocalRepository(implements(FirefighterRepository)):
         return [
             Firefighter(
                 firefighter_id="123",
+                email="tom@test.com",
                 name="Tom",
                 phone="+34666666666"
             ),
             Firefighter(
                 firefighter_id="321",
+                email="mot@test.com",
                 name="Mot",
                 phone="+34555555555"
             )
