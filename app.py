@@ -1,29 +1,17 @@
+from typing import List
+
 from chalice import Chalice
 
-app = Chalice(app_name='cosa')
+from fire_manager.application.firefighter_serializers import FirefightersSerializers
+from fire_manager.data.firefighter.FirefighterLocalRepository import FirefighterLocalRepository
+from fire_manager.domain.firefighter.firefighter import Firefighter
+from fire_manager.domain.firefighter.list_all_firefighters_usecase import ListAllFirefightersUseCase
 
+app = Chalice(app_name='firefighter_manager')
 
-@app.route('/')
-def index():
-    return {'hello': 'world'}
-
-
-# The view function above will return {"hello": "world"}
-# whenever you make an HTTP GET request to '/'.
-#
-# Here are a few more examples:
-#
-# @application.route('/hello/{name}')
-# def hello_name(name):
-#    # '/hello/james' -> {"hello": "james"}
-#    return {'hello': name}
-#
-# @application.route('/users', methods=['POST'])
-# def create_user():
-#     # This is the JSON body the user sent in their POST request.
-#     user_as_json = application.current_request.json_body
-#     # We'll echo the json body back to the user in a 'user' key.
-#     return {'user': user_as_json}
-#
-# See the README documentation for more examples.
-#
+@app.route('/list_firefighters')
+def list_firefighters():
+    local_repository = FirefighterLocalRepository()
+    use_case = ListAllFirefightersUseCase(local_repository)
+    firefighters: List[Firefighter] = use_case.execute()
+    return FirefightersSerializers.to_json(firefighters)
