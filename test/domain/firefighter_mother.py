@@ -8,11 +8,13 @@ class FirefighterMother:
     @staticmethod
     def get_any_firefighter(
             firefighter_id="123",
+            email="test@smart.me",
             name="Tom",
             phone="+34666666666"
     ) -> Firefighter:
         return Firefighter(
             firefighter_id=firefighter_id,
+            email=email,
             name=name,
             phone=phone
         )

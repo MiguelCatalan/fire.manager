@@ -2,7 +2,7 @@ from fire_manager.application.firefighter_serializers import FirefighterSerializ
 from fire_manager.application.firefighter_serializers import FirefightersSerializers
 from test.domain.firefighter_mother import FirefighterMother
 
-JSON_FIREFIGHTER = '{"firefighter_id": "123", "name": "Tom", "phone": "+34666666666"}'
+JSON_FIREFIGHTER = '{"firefighter_id": "123", "email": "test@smart.me", "name": "Tom", "phone": "+34666666666"}'
 JSON_FIREFIGHTER_LIST = f'[{JSON_FIREFIGHTER}, {JSON_FIREFIGHTER}, {JSON_FIREFIGHTER}]'
 
 
