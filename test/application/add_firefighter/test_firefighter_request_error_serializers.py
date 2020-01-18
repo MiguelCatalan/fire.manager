@@ -1,7 +1,7 @@
 import pytest
 from chalice import ConflictError, UnprocessableEntityError, ChaliceViewError
 
-from fire_manager.application.firefighter_request_error_serializers import \
+from fire_manager.application.firefighter.add_firefighter.firefighter_request_error_serializers import \
     NewFirefighterErrorSerializers
 from fire_manager.domain.firefighter.add_firefighter.add_firefighter_usecase import \
     FirefighterAlreadyRegistered, MissingMandatoryFields

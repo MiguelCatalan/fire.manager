@@ -17,3 +17,9 @@ class FirefighterRepository(Interface):
 
     def save_firefighter(self, request: NewFirefighterRequest) -> Firefighter:
         pass
+
+    def get_firefighter(self, firefighter_id: str) -> Firefighter:
+        pass
+
+    def remove_firefighter(self, firefighter_id: str) -> bool:
+        pass

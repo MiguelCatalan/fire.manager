@@ -1,4 +1,4 @@
-from fire_manager.application.firefighter_request_serializers import \
+from fire_manager.application.firefighter.add_firefighter.firefighter_request_serializers import \
     NewFirefighterRequestSerializers
 
 

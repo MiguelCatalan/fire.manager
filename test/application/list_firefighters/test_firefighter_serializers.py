@@ -1,5 +1,5 @@
-from fire_manager.application.firefighter_serializers import FirefighterSerializers
-from fire_manager.application.firefighter_serializers import FirefightersSerializers
+from fire_manager.application.firefighter.list_firefighters.firefighter_serializers import FirefighterSerializers
+from fire_manager.application.firefighter.list_firefighters.firefighter_serializers import FirefightersSerializers
 from test.domain.firefighter_mother import FirefighterMother
 
 JSON_FIREFIGHTER = '{"firefighter_id": "123", "email": "test@smart.me", "name": "Tom", "phone": "+34666666666"}'
