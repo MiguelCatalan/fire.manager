@@ -2,11 +2,11 @@ from typing import List
 
 from chalice import Chalice
 
-from fire_manager.application.firefighter_request_error_serializers import \
+from fire_manager.application.firefighter.add_firefighter.firefighter_request_error_serializers import \
     NewFirefighterErrorSerializers
-from fire_manager.application.firefighter_request_serializers import \
+from fire_manager.application.firefighter.add_firefighter.firefighter_request_serializers import \
     NewFirefighterRequestSerializers
-from fire_manager.application.firefighter_serializers import FirefightersSerializers, \
+from fire_manager.application.firefighter.list_firefighters.firefighter_serializers import FirefightersSerializers, \
     FirefighterSerializers
 from fire_manager.data.firefighter.FirefighterLocalRepository import FirefighterLocalRepository
 from fire_manager.domain.firefighter.add_firefighter.add_firefighter_usecase import \
