@@ -3,6 +3,7 @@ from fire_manager.domain.firefighter.firefighter_repository import FirefighterRe
 
 
 class MissingMandatoryId(Exception):
+    ID_IS_MISSING = 'Field "id" is mandatory'
     pass
 
 
@@ -29,7 +30,7 @@ class RemoveFirefighterUseCase(object):
 
     def __validate_id(self, firefighter_id):
         if firefighter_id == "":
-            raise MissingMandatoryId()
+            raise MissingMandatoryId(MissingMandatoryId.ID_IS_MISSING)
 
     def __check_if_firefighter_exists(self, firefighter_id):
         firefighter: Firefighter = self.firefighter_repository.get_firefighter(firefighter_id)
