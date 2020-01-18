@@ -1,5 +1,3 @@
-import json
-
 from fire_manager.domain.firefighter.add_firefighter.new_firefighter_request import \
     NewFirefighterRequest
 
@@ -7,10 +5,9 @@ from fire_manager.domain.firefighter.add_firefighter.new_firefighter_request imp
 class NewFirefighterRequestSerializers:
 
     @staticmethod
-    def to_model(json_string: str) -> NewFirefighterRequest:
-        new_firefighter_request_json = json.loads(json_string)
+    def to_model(json_string) -> NewFirefighterRequest:
         return NewFirefighterRequest(
-            new_firefighter_request_json.get("email", None),
-            new_firefighter_request_json.get("name", None),
-            new_firefighter_request_json.get("phone", None)
+            json_string.get("email", None),
+            json_string.get("name", None),
+            json_string.get("phone", None)
         )
