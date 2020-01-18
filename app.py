@@ -28,11 +28,11 @@ from fire_manager.domain.firefighter.remove_firefighter.remove_firefighter_useca
 
 app = Chalice(app_name='firefighter_manager')
 app.debug = True
+local_repository = FirefighterLocalRepository()  # TODO: How should we inject this dependecy?
 
 
 @app.route('/list_firefighters')
 def list_firefighters():
-    local_repository = FirefighterLocalRepository()
     use_case = ListAllFirefightersUseCase(local_repository)
 
     firefighters: List[Firefighter] = use_case.execute()
@@ -41,7 +41,6 @@ def list_firefighters():
 
 @app.route('/new_firefighter', methods=['POST'])
 def new_firefighter():
-    local_repository = FirefighterLocalRepository()
     use_case = AddFirefighterUseCase(local_repository)
 
     current_request = app.current_request.json_body
@@ -58,7 +57,6 @@ def new_firefighter():
 
 @app.route('/remove_firefighter', methods=['POST'])
 def remove_firefighter():
-    local_repository = FirefighterLocalRepository()
     use_case = RemoveFirefighterUseCase(local_repository)
 
     current_request = app.current_request.json_body
