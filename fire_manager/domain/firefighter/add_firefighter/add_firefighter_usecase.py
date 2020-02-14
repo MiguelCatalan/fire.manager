@@ -8,7 +8,6 @@ class MissingMandatoryFields(Exception):
     EMAIL_IS_MISSING = 'Field "email" is mandatory'
     NAME_IS_MISSING = 'Field "name" is mandatory'
     PHONE_IS_MISSING = 'Field "phone" is mandatory'
-    pass
 
 
 class FirefighterAlreadyRegistered(Exception):

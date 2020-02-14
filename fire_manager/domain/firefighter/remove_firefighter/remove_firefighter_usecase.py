@@ -4,7 +4,6 @@ from fire_manager.domain.firefighter.firefighter_repository import FirefighterRe
 
 class MissingMandatoryId(Exception):
     ID_IS_MISSING = 'Field "id" is mandatory'
-    pass
 
 
 class FirefighterNotFound(Exception):
