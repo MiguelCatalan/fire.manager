@@ -28,7 +28,7 @@ from fire_manager.domain.firefighter.remove_firefighter.remove_firefighter_useca
 
 app = Chalice(app_name='firefighter_manager')
 app.debug = True
-local_repository = FirefighterLocalRepository()  # TODO: How should we inject this dependecy?
+local_repository = FirefighterLocalRepository()  # TODO: How should we inject this dependency?
 
 
 @app.route('/list_firefighters')

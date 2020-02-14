@@ -1,5 +1,5 @@
 import pytest
-from mock import Mock
+from unittest.mock import Mock
 
 from fire_manager.domain.firefighter.add_firefighter.add_firefighter_usecase import \
     AddFirefighterUseCase, MissingMandatoryFields, FirefighterAlreadyRegistered

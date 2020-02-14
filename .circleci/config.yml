@@ -1,0 +1,77 @@
+defaults: &defaults
+  working_directory: ~/fire.manager
+  docker:
+    - image: circleci/python:3.7
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
+version: 2.1
+jobs:
+  build_firemanager:
+    <<: *defaults
+    steps:
+      - checkout # check out source code to working directory
+      - run:
+          command: |
+            sudo pip install pipenv
+            pipenv lock
+      - restore_cache:
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: deps9--base--{{ checksum "Pipfile.lock" }}
+      - run:
+          command: |
+            pipenv sync
+      - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
+          key: deps9--base--{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+
+  test_firemanager:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          command: |
+            pipenv lock
+      - restore_cache:
+          keys:
+            # Find the most recently generated cache with the test stuff installed
+            - deps9--test--{{ checksum "Pipfile" }}
+            # If not, use the base
+            - deps9--base--{{ checksum "Pipfile.lock" }}
+      - run:
+          command: |
+            pipenv install --dev
+            pipenv install pytest-cov
+            pipenv install pytest-html
+      - save_cache: # Save dependencies with the pytest stuff already installed
+          key: deps9--test--{{ checksum "Pipfile" }}
+          paths:
+            - ".venv"
+      - run:
+          command: |
+            mkdir test-results
+            pipenv run pytest --cov=fire_manager --cov-report=html:test-results/coverage.html --cov-report=xml:test-results/coverage.xml --html=test-results/report.html --junitxml=test-results/report.xml
+      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data
+          path: test-results
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts
+          path: test-results
+          destination: tr1
+
+  sonar_firemanager:
+    <<: *defaults
+    steps:
+      - checkout
+      - sonarcloud/scan
+
+workflows:
+  build_test_analyze:
+    jobs:
+      - build_firemanager
+      - test_firemanager:
+          requires:
+            - build_firemanager
+      - sonar_firemanager:
+          requires:
+            - build_firemanager
+          context: SonarCloud
